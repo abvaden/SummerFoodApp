@@ -1,0 +1,23 @@
+{
+  "name": "summer-food-app",
+  "version": "0.0.1",
+  "description": "An app to show locations offering free or reduced lunches during the summer",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abvaden/SummerFoodApp.git"
+  },
+  "author": "abvaden801@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abvaden/SummerFoodApp/issues"
+  },
+  "homepage": "https://github.com/abvaden/SummerFoodApp#readme",
+  "dependencies": {
+    "mocha": "^3.4.2",
+    "node-fetch": "^1.7.1"
+  }
+}
