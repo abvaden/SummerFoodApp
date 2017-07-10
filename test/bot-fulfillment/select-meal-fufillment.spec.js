@@ -37,4 +37,41 @@ describe('SelectMealRequest', () => {
 
         expect(selectMealRequest.getLunch()).to.equal(true, 'Failed to parse lunch');
     });
+
+    it('Should properly parse a valid all meals request', () => {
+        const request = {
+            "messageVersion": "1.0",
+            "invocationSource": "FulfillmentCodeHook",
+            "userId": "Some long string",
+            "sessionAttributes": null,
+            "bot": {
+                "name": "SummerFood",
+                "alias": null,
+                "version": "$LATEST"
+            },
+            "outputDialogMode": "Text",
+            "currentIntent": {
+                "name": "MealSelect",
+                "slots": {
+                    "all": "all",
+                    "lunch": null,
+                    "snack": null,
+                    "breakfast": null,
+                    "any": null,
+                    "dinner": null
+                },
+                "confirmationStatus": "None"
+            },
+            "inputTranscript": "I would like to find places that serve lunch"
+        };
+
+        var selectMealRequest = new SelectMealRequest();
+        selectMealRequest.Parse(request);
+
+        expect(selectMealRequest.getBreakfast()).to.equal(true, 'Failed to set true for breakfast in all request');
+        expect(selectMealRequest.getLunch()).to.equal(true, 'Failed to set true for lunch in all request');
+        expect(selectMealRequest.getSnack()).to.equal(true, 'Failed to set true for snack in all request');
+        expect(selectMealRequest.getDinner()).to.equal(true, 'Failed to set true for dinner in all request');
+        expect(selectMealRequest.getAny()).to.equal(false, 'Failed to set false for any in all request');
+    });
 });
