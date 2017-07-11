@@ -1,8 +1,5 @@
-var chai = require('chai'),
-    expect = chai.expect,
-    should = chai.should();
-
-import SelectMealRequest from '../../lib/bot-fulfillment/select-meal-fulfillment.js'
+import {expect, should} from 'chai';
+import {SelectMealRequest} from '../../lib/bot-fulfillment/select-meal-fulfillment.js'
 
 describe('SelectMealRequest', () => {
     it('Should properly parse a valid request', () => {
@@ -41,7 +38,7 @@ describe('SelectMealRequest', () => {
         expect(selectMealRequest.getDinner()).to.equal(false, 'Failed to set true for dinner in all request');
         expect(selectMealRequest.getAny()).to.equal(false, 'Failed to set false for any in all request');
 
-        const validationErrors = selectMealRequest.Validate();
+        const validationErrors = selectMealRequest.ValidateMeals();
         expect(validationErrors).to.be.empty;
     });
 
@@ -65,7 +62,8 @@ describe('SelectMealRequest', () => {
                     "snack": null,
                     "breakfast": null,
                     "any": null,
-                    "dinner": null
+                    "dinner": null,
+                    "meals": null
                 },
                 "confirmationStatus": "None"
             },
@@ -81,7 +79,9 @@ describe('SelectMealRequest', () => {
         expect(selectMealRequest.getDinner()).to.equal(true, 'Failed to set true for dinner in all request');
         expect(selectMealRequest.getAny()).to.equal(false, 'Failed to set false for any in all request');
 
-        const validationErrors = selectMealRequest.Validate();
+        expect(selectMealRequest.getRequest().currentIntent.slots.meals).to.equal(' breakfast, lunch, snack, dinner');
+
+        const validationErrors = selectMealRequest.ValidateMeals();
         expect(validationErrors).to.be.empty;
     });
 
@@ -115,7 +115,45 @@ describe('SelectMealRequest', () => {
         var selectMealRequest = new SelectMealRequest();
         selectMealRequest.Parse(request);
 
-        const validationErrors = selectMealRequest.Validate();
+        const validationErrors = selectMealRequest.ValidateMeals();
         expect(validationErrors).to.be.not.empty;
+    });
+
+    it('Should parse a valid location request', () => {
+        let lexRequest = {
+            "messageVersion": "1.0",
+            "invocationSource": "FulfillmentCodeHook",
+            "userId": "6vkzyb4sipa0c6gqelbzmbwn03cdpu8u",
+            "sessionAttributes": null,
+            "bot": {
+                "name": "SummerFood",
+                "alias": null,
+                "version": "$LATEST"
+            },
+            "outputDialogMode": "Text",
+            "currentIntent": {
+                "name": "MealSelect",
+                "slots": {
+                    "all": null,
+                    "lunch": null,
+                    "address": "12417 cumberland crest drive",
+                    "snack": null,
+                    "breakfast": null,
+                    "radius": null,
+                    "any": "breakfast",
+                    "dinner": null,
+                    "meals": "any meal"
+                },
+                "confirmationStatus": "None"
+            },
+            "inputTranscript": "find places near 12417 cumberland crest drive"
+        };
+
+        let request = new SelectMealRequest();
+        request.Parse(lexRequest);
+        let validationErrors = request.ValidateLocation();
+
+        expect(validationErrors).to.be.empty;
+        expect(request.getLocationValidated()).to.equal(true);
     });
 });
