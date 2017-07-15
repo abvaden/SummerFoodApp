@@ -51,7 +51,7 @@ describe('Select meal intent', () => {
         const event = {
             "messageVersion": "1.0",
             "invocationSource": "FulfillmentCodeHook",
-            "userId": "c6pimm383x6juv5uneutjz2aodtjg55i",
+            "userId": "some-long-string",
             "sessionAttributes": {
                 "MealFilter": "Breakfast,"
             },
@@ -66,7 +66,7 @@ describe('Select meal intent', () => {
                 "slots": {
                     "all": null,
                     "lunch": null,
-                    "address": "12417 Cumberland Crest Drive",
+                    "address": "165 W 46th St New York",
                     "snack": null,
                     "breakfast": "breakfast",
                     "radius": null,
@@ -82,7 +82,10 @@ describe('Select meal intent', () => {
 
         const callback = (something, response) => {
             try {
-
+                expect(response).to.not.equal(null, 'Response must have a value');
+                expect(response).to.have.property('dialogAction');
+                expect(response.dialogAction.type).to.equal('');
+                expect(response.dialogAction)
             } finally {
                 done();
             }
