@@ -46,4 +46,48 @@ describe('Select meal intent', () => {
         // Invoke the lambda function the way lex will
         handler(event, context, callback);
     });
+
+    it('should respond with a number of locations with the session attributes set', (done) => {
+        const event = {
+            "messageVersion": "1.0",
+            "invocationSource": "FulfillmentCodeHook",
+            "userId": "c6pimm383x6juv5uneutjz2aodtjg55i",
+            "sessionAttributes": {
+                "MealFilter": "Breakfast,"
+            },
+            "bot": {
+                "name": "SummerFood",
+                "alias": null,
+                "version": "$LATEST"
+            },
+            "outputDialogMode": "Text",
+            "currentIntent": {
+                "name": "MealSelect",
+                "slots": {
+                    "all": null,
+                    "lunch": null,
+                    "address": "12417 Cumberland Crest Drive",
+                    "snack": null,
+                    "breakfast": "breakfast",
+                    "radius": null,
+                    "any": null,
+                    "dinner": null,
+                    "meals": " breakfast"
+                },
+                "confirmationStatus": "None"
+            },
+            "inputTranscript": "12417 Cumberland Crest Drive"
+        };
+        const context = {};
+
+        const callback = (something, response) => {
+            try {
+
+            } finally {
+                done();
+            }
+        };
+
+        handler(event, context, callback);
+    });
 });
