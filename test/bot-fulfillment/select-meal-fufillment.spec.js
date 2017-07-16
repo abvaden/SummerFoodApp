@@ -123,7 +123,7 @@ describe('SelectMealRequest', () => {
         let lexRequest = {
             "messageVersion": "1.0",
             "invocationSource": "FulfillmentCodeHook",
-            "userId": "6vkzyb4sipa0c6gqelbzmbwn03cdpu8u",
+            "userId": "some-long-string",
             "sessionAttributes": null,
             "bot": {
                 "name": "SummerFood",

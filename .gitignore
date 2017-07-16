@@ -59,3 +59,4 @@ typings/
 
 # Compiled lambda function
 dist
+aws-lambda-user-settings.json

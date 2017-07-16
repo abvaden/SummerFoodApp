@@ -47,7 +47,7 @@ describe('Select meal intent', () => {
         handler(event, context, callback);
     });
 
-    it('should respond with a number of locations with the session attributes set', (done) => {
+    it('should respond with a number of locations and with the location session attributes set', (done) => {
         const event = {
             "messageVersion": "1.0",
             "invocationSource": "FulfillmentCodeHook",
@@ -76,7 +76,7 @@ describe('Select meal intent', () => {
                 },
                 "confirmationStatus": "None"
             },
-            "inputTranscript": "12417 Cumberland Crest Drive"
+            "inputTranscript": "165 W 46th St New York"
         };
         const context = {};
 
@@ -84,10 +84,14 @@ describe('Select meal intent', () => {
             try {
                 expect(response).to.not.equal(null, 'Response must have a value');
                 expect(response).to.have.property('dialogAction');
-                expect(response.dialogAction.type).to.equal('');
-                expect(response.dialogAction)
-            } finally {
+                expect(response.dialogAction.type).to.equal('Close');
+                expect(response.dialogAction.fulfillmentState).to.equal('Fulfilled');
+                expect(response.dialogAction.message).to.not.equal(null, 'Message was not defined for the response');
+                expect(response.dialogAction.message).to.have.property('content');
+                expect(response.dialogAction.message.content.includes('Great! I found ')).to.equal(true);
                 done();
+            } catch (e) {
+                done(false);
             }
         };
 
