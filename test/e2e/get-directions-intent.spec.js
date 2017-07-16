@@ -36,8 +36,8 @@ describe('Select meal intent', () => {
                 expect(response).to.not.equal(null, 'Response must have a value');
                 expect(response.dialogAction).to.have.property('type');
                 expect(response.dialogAction.type).to.equal('ElicitSlot', 'Expected response type of elicit slot');
-                expect(response.dialogAction.message).to.have.property('ContentType');
-                expect(response.dialogAction.message).to.have.property('Content');
+                expect(response.dialogAction.message).to.have.property('contentType');
+                expect(response.dialogAction.message).to.have.property('content');
             } finally {
                 done();
             }
@@ -62,7 +62,7 @@ describe('Select meal intent', () => {
             "bot": {
                 "name": "SummerFood",
                 "alias": null,
-                "version": "$LATEST"
+                "version": "$UNITTEST"
             },
             "outputDialogMode": "Text",
             "currentIntent": {

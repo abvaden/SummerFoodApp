@@ -17,7 +17,7 @@ describe('Show meal intent', () => {
             "bot": {
                 "name": "SummerFood",
                 "alias": null,
-                "version": "$LATEST"
+                "version": "$UNITTEST"
             },
             "outputDialogMode": "Text",
             "currentIntent": {
@@ -60,7 +60,7 @@ describe('Show meal intent', () => {
             "bot": {
                 "name": "SummerFood",
                 "alias": null,
-                "version": "$LATEST"
+                "version": "$UNITTEST"
             },
             "outputDialogMode": "Text",
             "currentIntent": {

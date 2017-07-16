@@ -32,15 +32,12 @@ describe('Select meal intent', () => {
         const context = {};
         // This callback is called after 
         const callback = (something, response) => {
-            try {
-                expect(response).to.not.equal(null, 'Response must have a value');
-                expect(response.dialogAction).to.have.property('type');
-                expect(response.dialogAction.type).to.equal('ElicitSlot', 'Expected response type of elicit slot');
-                expect(response.dialogAction.message).to.have.property('ContentType');
-                expect(response.dialogAction.message).to.have.property('Content');
-            } finally {
-                done();
-            }
+            expect(response).to.not.equal(null, 'Response must have a value');
+            expect(response.dialogAction).to.have.property('type');
+            expect(response.dialogAction.type).to.equal('ElicitSlot');
+            expect(response.dialogAction.message).to.have.property('contentType');
+            expect(response.dialogAction.message).to.have.property('content');
+            done();
         };
 
         // Invoke the lambda function the way lex will
@@ -58,7 +55,7 @@ describe('Select meal intent', () => {
             "bot": {
                 "name": "SummerFood",
                 "alias": null,
-                "version": "$LATEST"
+                "version": "$UNITTEST"
             },
             "outputDialogMode": "Text",
             "currentIntent": {
