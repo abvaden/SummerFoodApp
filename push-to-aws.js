@@ -44,7 +44,7 @@ findFunctionDetails.then((lambdaFunction) => {
     let data = null;
     try {
         let uncompressedData = fs.readFileSync('./dist/main.js', 'utf8');
-        zip.file(functionName, uncompressedData);
+        zip.file('index.js', uncompressedData);
         let compressedData = zip.generate({ base64:false, compression:'DEFLATE' });
         if (fs.exists('./dist/main.zip')){
             fs.unlinkSync('./dist/main.zip');
