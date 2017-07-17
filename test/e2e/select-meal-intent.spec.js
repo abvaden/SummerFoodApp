@@ -55,7 +55,7 @@ describe('Select meal intent', () => {
             "bot": {
                 "name": "SummerFood",
                 "alias": null,
-                "version": "$UNITTEST"
+                "version": "$UnitTest"
             },
             "outputDialogMode": "Text",
             "currentIntent": {

@@ -1,4 +1,4 @@
-import {handler} from '../../lib/bot-fulfillment.js'
+import {handler} from '../../lib/bot-fulfillment/fulfillment';
 import {expect} from 'chai';
 
 describe('Show details intent', () => {
@@ -6,18 +6,18 @@ describe('Show details intent', () => {
         const  event = {
             "messageVersion": "1.0",
             "invocationSource": "FulfillmentCodeHook",
-            "userId": "A long string",
+            "userId": "some long string",
             "sessionAttributes": {
-                "MealFilter": "Breakfast,",
-                "Location": "{\"lat\":40.7585913,\"lng\":-73.9846199}",
-                "Radius": "96560.6",
+                "Radius": "10000.0",
+                "FoodLocationsCount": "1189",
                 "Address": "165 W 46th St New York",
-                "FoodLocationsCount": "1017"
+                "MealFilter": "Lunch,",
+                "Location": "{\"lat\":40.7585913,\"lng\":-73.9846199}"
             },
             "bot": {
                 "name": "SummerFood",
                 "alias": null,
-                "version": "$LATEST"
+                "version": "$UnitTest"
             },
             "outputDialogMode": "Text",
             "currentIntent": {
@@ -25,21 +25,18 @@ describe('Show details intent', () => {
                 "slots": {},
                 "confirmationStatus": "None"
             },
-            "inputTranscript": "show me"
+            "inputTranscript": "show me more details"
         };
         const context = {};
 
-        handler(event, context, (something, results) => {
+        handler(event, context, (something, response) => {
             // Check the response is a valid format
             expect(response).to.not.equal(null, 'Response must have a value');
             expect(response).to.have.property('dialogAction');
             expect(response.dialogAction.type).to.equal('Close');
             expect(response.dialogAction.fulfillmentState).to.equal('Fulfilled');
-            expect(response.dialogAction.message).to.not.equal(null, 'Message was not defined for the response');
-            expect(response.dialogAction.message).to.have.property('content');
             
             // Do some checks on the data returned
-            
             done();
         });
     });
