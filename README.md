@@ -24,3 +24,6 @@ Jude is written using some features from the ES2015 specification and higher, to
 To publish fulfillment code to lambda you can use the npm publish script. This will read the configuration parameters stored in a user secret file aws-lambda-user-settings.json in the root of the project to publish the code to lambda (still a work in progress).  
 
 While the publish feature is being worked on the source code can be compiled by running npm run prepublish, this will generate a file which can be copied and pasted into the lambda inline editor (/dist/main.js). Similarly running the npm publish script will create a /dist/main.zip file which can be uploaded to lambda.
+
+To give jude a try add to slack  
+<a href="https://slack.com/oauth/authorize?&client_id=188339149894.209789751122&scope=bot,chat:write:bot,team:read,im:history"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
